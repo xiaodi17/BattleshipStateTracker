@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
 using BattleshipStateTracker.Service;
+using BattleshipStateTracker.Service.Exceptions;
 using Xunit;
 
 namespace BattleshipStateTracker.Test
@@ -23,6 +24,22 @@ namespace BattleshipStateTracker.Test
             var ship = await _battleshipService.AddBattleShip("A",startCoord, endCoord);
 
             Assert.Equal(2, ship.Cells.Count);
+        }
+        
+        [Fact]
+        public async Task AddBattleship_Outside_board()
+        {
+            _battleshipService.CreateBoard("B");
+            var startCoord = new Point(8, 2);
+            var endCoord = new Point(2, 1);
+
+            var ex = await Assert.ThrowsAsync<InvalidBattleshipCreateException>(() => _battleshipService.AddBattleShip(
+                "B",
+                startCoord,
+                endCoord));
+ 
+            Assert.Equal("Ship has to be vertical or horizontal.", ex.Message);
+            
         }
     }
 }

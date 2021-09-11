@@ -7,6 +7,8 @@ namespace BattleshipStateTracker.Service.Models
         public string BoardId { get; set; }
         public List<Cell> Cells { get; set; }
         
+        public int Size { get; set; }
+        
         public Board(string boardId, int size)
         {
             BoardId = boardId;
@@ -18,6 +20,7 @@ namespace BattleshipStateTracker.Service.Models
                     Cells.Add(new Cell(i, j));
                 }
             }
+            Size = size;
         }
     }
 }

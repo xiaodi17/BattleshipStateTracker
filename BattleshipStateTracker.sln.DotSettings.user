@@ -5,5 +5,6 @@
     &lt;TestId&gt;xUnit::B73499C3-EB1A-4667-8E4A-E2D9BE93B640::.NETCoreApp,Version=v3.1::BattleshipStateTracker.Test.BattleshipAddShipTest.AddBattleship&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::B73499C3-EB1A-4667-8E4A-E2D9BE93B640::.NETCoreApp,Version=v3.1::BattleshipStateTracker.Test.BattleshipAttackTest.AttackBattleship&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::B73499C3-EB1A-4667-8E4A-E2D9BE93B640::.NETCoreApp,Version=v3.1::BattleshipStateTracker.Test.BattleshipAttackTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B73499C3-EB1A-4667-8E4A-E2D9BE93B640::.NETCoreApp,Version=v3.1::BattleshipStateTracker.Test.BattleshipAddShipTest.AddBattleship_Outside_board&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
