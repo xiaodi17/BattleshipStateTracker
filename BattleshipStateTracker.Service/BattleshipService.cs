@@ -50,6 +50,11 @@ namespace BattleshipStateTracker.Service
             {
                 throw new InvalidBattleshipCreateException("Invalid position to create battleship: Out of board.");
             }
+
+            if (!BattleshipHelper.IsShipHorizontalOrVertical(startCoord, endCoord))
+            {
+                throw new InvalidBattleshipCreateException("Ship has to be vertical or horizontal.");
+            }
         }
 
         public async Task<CellStatus> Attack(string boardId, Point attackCoord)
