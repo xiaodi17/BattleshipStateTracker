@@ -17,10 +17,10 @@ namespace BattleshipStateTracker.Test
         [Fact]
         public async Task AddBattleship()
         {
-            _battleshipService.CreateBoard();
+            _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
-            var ship = await _battleshipService.AddBattleShip(startCoord, endCoord);
+            var ship = await _battleshipService.AddBattleShip("A",startCoord, endCoord);
 
             Assert.Equal(2, ship.Cells.Count);
         }

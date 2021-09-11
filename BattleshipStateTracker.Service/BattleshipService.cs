@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,18 +14,21 @@ namespace BattleshipStateTracker.Service
         {
         }
 
-        public Board board { get; set; }
-        public void CreateBoard(int size = 10)
+        public List<Board> _boards = new List<Board>();
+
+        public void CreateBoard(string boardId, int size = 10)
         {
-            board = new Board(size);
+            var board = new Board(boardId,size);
+            _boards.Add(board);
         }
 
-        public async Task<Battleship> AddBattleShip(Point startCoord, Point endCoord)
+        public async Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord)
         {
+            var board = _boards.FirstOrDefault(i => i.BoardId == boardId);
             var cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
-                                   && c.Coordinate.Y >= startCoord.Y
-                                   && c.Coordinate.X <= endCoord.X
-                                   && c.Coordinate.Y <= endCoord.Y).ToList();
+                                               && c.Coordinate.Y >= startCoord.Y
+                                               && c.Coordinate.X <= endCoord.X
+                                               && c.Coordinate.Y <= endCoord.Y).ToList();
 
             foreach (var cell in cells)
             {
@@ -35,8 +39,9 @@ namespace BattleshipStateTracker.Service
             return await Task.FromResult(ship);
         }
 
-        public async Task<CellStatus> Attack(Point attackCoord)
+        public async Task<CellStatus> Attack(string boardId, Point attackCoord)
         {
+            var board = _boards.FirstOrDefault(i => i.BoardId == boardId);
             var cell = board.Cells.FirstOrDefault(c => c.Coordinate.X == attackCoord.X
                                               && c.Coordinate.Y == attackCoord.Y);
             if (cell.Status == CellStatus.Battleship)

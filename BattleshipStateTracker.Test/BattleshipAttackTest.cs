@@ -18,11 +18,11 @@ namespace BattleshipStateTracker.Test
         [Fact]
         public async Task AttackBattleship()
         {
-            _battleshipService.CreateBoard();
+            _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
-            var ship = await _battleshipService.AddBattleShip(startCoord, endCoord);
-            var status = await _battleshipService.Attack(startCoord);
+            var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            var status = await _battleshipService.Attack("A", startCoord);
 
             Assert.Equal(CellStatus.Hit, status);
         }

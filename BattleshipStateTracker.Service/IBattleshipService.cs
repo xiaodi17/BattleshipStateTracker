@@ -7,8 +7,8 @@ namespace BattleshipStateTracker.Service
 {
     public interface IBattleshipService
     {
-        void CreateBoard(int size = 10);
-        Task<Battleship> AddBattleShip(Point startCoord, Point endCoord);
-        Task<CellStatus> Attack(Point attackCoord);
+        void CreateBoard(string boardId, int size = 10);
+        Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord);
+        Task<CellStatus> Attack(string boardId, Point attackCoord);
     }
 }

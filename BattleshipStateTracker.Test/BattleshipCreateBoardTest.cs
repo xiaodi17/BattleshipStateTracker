@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BattleshipStateTracker.Service;
 using BattleshipStateTracker.Service.Models;
 using Xunit;
@@ -17,9 +18,10 @@ namespace BattleshipStateTracker.Test
         [Fact]
         public void CreateBoard()
         {
-            _battleshipService.CreateBoard();
+            _battleshipService.CreateBoard("A");
+            var board = _battleshipService._boards.FirstOrDefault(i => i.BoardId == "A");
 
-            Assert.Equal(100, _battleshipService.board.Cells.Count);
+            Assert.Equal(100, board.Cells.Count);
         }
     }
 }
