@@ -84,7 +84,12 @@ namespace BattleshipStateTracker.API.Controllers
             try
             {
                 var response = await _battleshipService.Attack(boardId, new Point(row, col));
-                return Ok(response);
+                return Ok(response.ToString());
+            }
+            catch (InvalidAttackException ex)
+            {
+                _logger.LogError(ex.Message);
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
