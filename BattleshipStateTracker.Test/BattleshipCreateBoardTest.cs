@@ -18,9 +18,7 @@ namespace BattleshipStateTracker.Test
         public void CreateBoard()
         {
             _battleshipService.CreateBoard();
-            //Assert board size 10*10
-            //Assert ship on the board 0
-            
+
             Assert.Equal(100, _battleshipService.board.Cells.Count);
         }
     }
