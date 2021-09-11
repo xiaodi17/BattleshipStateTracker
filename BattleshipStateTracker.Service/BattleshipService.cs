@@ -29,6 +29,7 @@ namespace BattleshipStateTracker.Service
             {
                 throw new InvalidBattleshipCreateException("Ship has to be vertical or horizontal.");
             }
+            
             var board = GetBoard(boardId);
             var cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
                                                && c.Coordinate.Y >= startCoord.Y
