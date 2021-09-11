@@ -53,7 +53,25 @@ namespace BattleshipStateTracker.Test
                 startCoord,
                 endCoord));
  
-            Assert.Equal("Invalid position to create battleship.", ex.Message);
+            Assert.Equal("Invalid position to create battleship: Out of board.", ex.Message);
+        }
+        
+        [Fact]
+        public async Task AddBattleship_On_Occupied_Cell()
+        {
+            _battleshipService.CreateBoard("A");
+            var firstShipStartCoord = new Point(2, 1);
+            var firstShipEndCoord = new Point(9, 1);
+
+            var secondShipStartCoord = new Point(5, 1);
+            var secondShipEndCoord = new Point(8, 1);
+            await _battleshipService.AddBattleShip("A", firstShipStartCoord, firstShipEndCoord);
+            var ex = await Assert.ThrowsAsync<InvalidBattleshipCreateException>(() => _battleshipService.AddBattleShip(
+                "A",
+                secondShipStartCoord,
+                secondShipEndCoord));
+ 
+            Assert.Equal("Invalid position to create battleship: This cell is occupied.", ex.Message);
         }
     }
 }

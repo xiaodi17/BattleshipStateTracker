@@ -25,10 +25,7 @@ namespace BattleshipStateTracker.Service
 
         public async Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord)
         {
-            if (!BattleshipHelper.IsShipHorizontalOrVertical(startCoord, endCoord))
-            {
-                throw new InvalidBattleshipCreateException("Ship has to be vertical or horizontal.");
-            }
+            ValidateAddBattleshipPosition(boardId, startCoord, endCoord);
             
             var board = GetBoard(boardId);
             var cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
@@ -38,12 +35,21 @@ namespace BattleshipStateTracker.Service
 
             foreach (var cell in cells)
             {
-                ValidateBattleshipCreate(boardId, cell.Coordinate);
+                ValidateBattleshipOccupied(boardId, cell);
                 cell.Status = CellStatus.Battleship;
             }
 
             var ship = new Battleship(startCoord, endCoord, cells);
             return await Task.FromResult(ship);
+        }
+
+        private void ValidateAddBattleshipPosition(string boardId, Point startCoord, Point endCoord)
+        {
+            var board = GetBoard(boardId);
+            if (!BattleshipHelper.IsValidCoordinate(board, startCoord) || !BattleshipHelper.IsValidCoordinate(board, endCoord))
+            {
+                throw new InvalidBattleshipCreateException("Invalid position to create battleship: Out of board.");
+            }
         }
 
         public async Task<CellStatus> Attack(string boardId, Point attackCoord)
@@ -63,12 +69,11 @@ namespace BattleshipStateTracker.Service
             return await Task.FromResult(cell.Status);
         }
 
-        private void ValidateBattleshipCreate(string boardId, Point coordinate)
+        private void ValidateBattleshipOccupied(string boardId, Cell cell)
         {
-            var board = GetBoard(boardId);
-            if (!BattleshipHelper.IsValidCoordinate(board, coordinate))
+            if (cell.Status == CellStatus.Battleship)
             {
-                throw new InvalidBattleshipCreateException("Invalid position to create battleship.");
+                throw new InvalidBattleshipCreateException("Invalid position to create battleship: This cell is occupied.");
             }
         }
 
