@@ -78,6 +78,13 @@ namespace BattleshipStateTracker.API.Controllers
             }
         }
         
+        /// <summary>
+        /// Attack
+        /// </summary>
+        /// <param name="boardId"></param>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
         [HttpPut("attack")]
         public async Task<IActionResult> Attack(string boardId, int row, int col)
         {
