@@ -34,5 +34,21 @@ namespace BattleshipStateTracker.Service
             var ship = new Battleship(startCoord, endCoord, cells);
             return await Task.FromResult(ship);
         }
+
+        public async Task<CellStatus> Attack(Point attackCoord)
+        {
+            var cell = board.Cells.FirstOrDefault(c => c.Coordinate.X == attackCoord.X
+                                              && c.Coordinate.Y == attackCoord.Y);
+            if (cell.Status == CellStatus.Battleship)
+            {
+                cell.Status = CellStatus.Hit;
+            }
+            else
+            {
+                cell.Status = CellStatus.Miss;
+            }
+
+            return await Task.FromResult(cell.Status);
+        }
     }
 }
