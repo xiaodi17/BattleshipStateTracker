@@ -8,5 +8,9 @@
     <ProjectReference Include="..\BattleshipStateTracker.Service\BattleshipStateTracker.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+
 
 </Project>
