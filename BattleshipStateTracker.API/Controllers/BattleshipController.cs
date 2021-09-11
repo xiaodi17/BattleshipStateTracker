@@ -46,6 +46,15 @@ namespace BattleshipStateTracker.API.Controllers
             }
         }
         
+        /// <summary>
+        /// Add a battleship to the board
+        /// </summary>
+        /// <param name="boardId"></param>
+        /// <param name="startRow"></param>
+        /// <param name="startCol"></param>
+        /// <param name="endRow"></param>
+        /// <param name="endCol"></param>
+        /// <returns></returns>
         [HttpPut("battleship")]
         public async Task<IActionResult> AddBattleShip(string boardId, int startRow, int startCol, int endRow, int endCol)
         {
@@ -61,6 +70,21 @@ namespace BattleshipStateTracker.API.Controllers
             {
                 _logger.LogError(ex.Message);
                 return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, ex.Message);
+            }
+        }
+        
+        [HttpPut("attack")]
+        public async Task<IActionResult> Attack(string boardId, int row, int col)
+        {
+            try
+            {
+                var response = await _battleshipService.Attack(boardId, new Point(row, col));
+                return Ok(response);
             }
             catch (Exception ex)
             {
