@@ -55,6 +55,7 @@ namespace BattleshipStateTracker.Service
         public async Task<CellStatus> Attack(string boardId, Point attackCoord)
         {
             var board = GetBoard(boardId);
+            BattleshipHelper.IsValidCoordinate(board, attackCoord);
             var cell = board.Cells.FirstOrDefault(c => c.Coordinate.X == attackCoord.X
                                               && c.Coordinate.Y == attackCoord.Y);
             if (cell.Status == CellStatus.Battleship)
