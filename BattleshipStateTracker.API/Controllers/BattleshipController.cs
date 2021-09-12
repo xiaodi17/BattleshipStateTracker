@@ -30,7 +30,7 @@ namespace BattleshipStateTracker.API.Controllers
         /// <param name="boardId"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        [HttpPost("create")]
+        [HttpPost("{boardId}/createBoard")]
         public async Task<IActionResult> Create(string boardId, int size = 10)
         {
             try
@@ -57,7 +57,7 @@ namespace BattleshipStateTracker.API.Controllers
         /// <param name="endRow"></param>
         /// <param name="endCol"></param>
         /// <returns></returns>
-        [HttpPut("battleship")]
+        [HttpPut("{boardId}/addBattleship")]
         public async Task<IActionResult> AddBattleShip(string boardId, int startRow, int startCol, int endRow, int endCol)
         {
             try
@@ -82,13 +82,13 @@ namespace BattleshipStateTracker.API.Controllers
         }
         
         /// <summary>
-        /// Attack
+        /// Attack a cell on the board
         /// </summary>
         /// <param name="boardId"></param>
         /// <param name="row"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        [HttpPut("attack")]
+        [HttpPut("{boardId}/attack")]
         public async Task<IActionResult> Attack(string boardId, int row, int col)
         {
             try
