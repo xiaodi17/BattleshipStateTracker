@@ -18,9 +18,9 @@ namespace BattleshipStateTracker.Test.UnitTest
         public async Task Battleship_Reset()
         {
             await _battleshipService.CreateBoard("A");
-            _battleshipService.Reset();
+            var boards = await _battleshipService.Reset();
             
-            Assert.Empty(_battleshipService._boards);
+            Assert.Empty(boards);
         }
     }
 }

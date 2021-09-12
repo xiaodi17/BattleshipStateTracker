@@ -68,9 +68,10 @@ namespace BattleshipStateTracker.Service
             return await Task.FromResult(cell.Status);
         }
 
-        public void Reset()
+        public async Task<List<Board>> Reset()
         {
             _boards = new List<Board>();
+            return await Task.FromResult(_boards);
         }
 
         private Board GetBoard(string boardId)

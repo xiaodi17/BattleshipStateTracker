@@ -116,7 +116,7 @@ namespace BattleshipStateTracker.API.Controllers
         {
             try
             {
-                _battleshipService.Reset();
+                await _battleshipService.Reset();
                 return Ok("Battleship State Tracker has been successfully reset.");
             }
             catch (Exception ex)
