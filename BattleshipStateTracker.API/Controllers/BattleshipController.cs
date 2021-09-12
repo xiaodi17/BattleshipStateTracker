@@ -23,13 +23,14 @@ namespace BattleshipStateTracker.API.Controllers
             _logger = logger;
             _battleshipService = battleshipService;
         }
-
+        
         /// <summary>
         /// Create a new board
         /// </summary>
         /// <param name="boardId"></param>
         /// <param name="size"></param>
         /// <returns></returns>
+        [ProducesResponseType(typeof(Board), 200)]
         [HttpPost("{boardId}/createBoard")]
         public async Task<IActionResult> Create(string boardId, int size = 10)
         {
@@ -57,6 +58,7 @@ namespace BattleshipStateTracker.API.Controllers
         /// <param name="endRow"></param>
         /// <param name="endCol"></param>
         /// <returns></returns>
+        [ProducesResponseType(typeof(Battleship), 200)]
         [HttpPut("{boardId}/addBattleship")]
         public async Task<IActionResult> AddBattleShip(string boardId, int startRow, int startCol, int endRow, int endCol)
         {
@@ -89,6 +91,7 @@ namespace BattleshipStateTracker.API.Controllers
         /// <param name="col"></param>
         /// <returns></returns>
         [HttpPut("{boardId}/attack")]
+        [ProducesResponseType(typeof(AttackResultModel), 200)]
         public async Task<IActionResult> Attack(string boardId, int row, int col)
         {
             try
