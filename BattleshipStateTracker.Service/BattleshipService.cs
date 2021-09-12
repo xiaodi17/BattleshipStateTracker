@@ -10,10 +10,6 @@ namespace BattleshipStateTracker.Service
 {
     public class BattleshipService: IBattleshipService
     {
-        public BattleshipService()
-        {
-        }
-
         public List<Board> _boards = new List<Board>();
 
         public async Task<Board> CreateBoard(string boardId, int size = 10)
@@ -86,6 +82,11 @@ namespace BattleshipStateTracker.Service
             }
 
             return await Task.FromResult(cell.Status);
+        }
+
+        public void Reset()
+        {
+            _boards = new List<Board>();
         }
 
         private bool IsCellOccupied(string boardId, Cell cell)

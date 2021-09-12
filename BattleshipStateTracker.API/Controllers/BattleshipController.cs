@@ -106,5 +106,20 @@ namespace BattleshipStateTracker.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        
+        [HttpPost("reset")]
+        public async Task<IActionResult> Reset()
+        {
+            try
+            {
+                _battleshipService.Reset();
+                return Ok("Battleship State Tracker has been successfully reset.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

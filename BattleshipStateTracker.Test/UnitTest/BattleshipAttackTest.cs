@@ -18,7 +18,7 @@ namespace BattleshipStateTracker.Test.UnitTest
         [Fact]
         public async Task AttackBattleship_Hit()
         {
-            _battleshipService.CreateBoard("A");
+            await _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
             var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
@@ -30,13 +30,25 @@ namespace BattleshipStateTracker.Test.UnitTest
         [Fact]
         public async Task AttackBattleship_Miss()
         {
-            _battleshipService.CreateBoard("A");
+            await _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
             var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
             var status = await _battleshipService.Attack("A", new Point(3,3));
 
             Assert.Equal(CellStatus.Miss, status);
+        }
+        
+        [Fact]
+        public async Task AttackBattleship_Out_Of_Board()
+        {
+            await _battleshipService.CreateBoard("A");
+            var startCoord = new Point(1, 1);
+            var endCoord = new Point(2, 1);
+            var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            var status = await _battleshipService.Attack("A", new Point(11,3));
+
+            Assert.Null(status);
         }
     }
 }

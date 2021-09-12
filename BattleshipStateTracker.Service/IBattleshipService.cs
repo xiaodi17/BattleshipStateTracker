@@ -10,5 +10,6 @@ namespace BattleshipStateTracker.Service
         Task<Board> CreateBoard(string boardId, int size = 10);
         Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord);
         Task<CellStatus?> Attack(string boardId, Point attackCoord);
+        void Reset();
     }
 }
