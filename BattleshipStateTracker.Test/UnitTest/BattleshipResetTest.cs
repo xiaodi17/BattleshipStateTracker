@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
 using BattleshipStateTracker.Service;
-using BattleshipStateTracker.Service.Models.Enums;
 using Xunit;
 
 namespace BattleshipStateTracker.Test.UnitTest

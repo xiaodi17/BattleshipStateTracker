@@ -17,7 +17,7 @@ namespace BattleshipStateTracker.Test.UnitTest
         [Fact]
         public async Task AddBattleship()
         {
-            _battleshipService.CreateBoard("A");
+            await _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
             var ship = await _battleshipService.AddBattleShip("A",startCoord, endCoord);
@@ -28,7 +28,7 @@ namespace BattleshipStateTracker.Test.UnitTest
         [Fact]
         public async Task AddBattleship_Not_Vertical_Horizontal()
         {
-            _battleshipService.CreateBoard("A");
+            await _battleshipService.CreateBoard("A");
             var startCoord = new Point(8, 2);
             var endCoord = new Point(2, 1);
 
@@ -41,7 +41,7 @@ namespace BattleshipStateTracker.Test.UnitTest
         [Fact]
         public async Task AddBattleship_Outside_Board()
         {
-            _battleshipService.CreateBoard("A");
+            await _battleshipService.CreateBoard("A");
             var startCoord = new Point(2, 1);
             var endCoord = new Point(11, 1);
             var battleShip = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
@@ -52,7 +52,7 @@ namespace BattleshipStateTracker.Test.UnitTest
         [Fact]
         public async Task AddBattleship_On_Occupied_Cell()
         {
-            _battleshipService.CreateBoard("A");
+            await _battleshipService.CreateBoard("A");
             var firstShipStartCoord = new Point(2, 1);
             var firstShipEndCoord = new Point(9, 1);
 
