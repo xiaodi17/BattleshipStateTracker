@@ -21,10 +21,14 @@ namespace BattleshipStateTracker.Service
 
         public async Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord)
         {
-            if (!ValidateAddBattleshipPosition(boardId, startCoord, endCoord))
-                return null;
-            
             var board = GetBoard(boardId);
+            if (board == null)
+            {
+                return null;
+            }
+            
+            if (!BattleshipHelper.ValidateAddBattleshipPosition(board, startCoord, endCoord))
+                return null;
 
             var cells = GetCellsByStartAndEndCoordinates(board, startCoord, endCoord);
 
@@ -70,16 +74,6 @@ namespace BattleshipStateTracker.Service
             }
             
             return cells;
-        }
-
-        private bool ValidateAddBattleshipPosition(string boardId, Point startCoord, Point endCoord)
-        {
-            var board = GetBoard(boardId);
-            if (!BattleshipHelper.IsValidCoordinate(board, startCoord) ||
-                !BattleshipHelper.IsValidCoordinate(board, endCoord))
-                return false;
-            
-            return BattleshipHelper.IsShipHorizontalOrVertical(startCoord, endCoord);
         }
 
         public async Task<CellStatus?> Attack(string boardId, Point attackCoord)

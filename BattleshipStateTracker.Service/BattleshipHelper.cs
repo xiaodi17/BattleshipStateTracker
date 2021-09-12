@@ -11,9 +11,18 @@ namespace BattleshipStateTracker.Service
             && coordinate.Y >= 0
             && coordinate.Y < board.Size;
 
-        public static bool IsShipHorizontalOrVertical(Point startCoord, Point endCoord)
+        private static bool IsShipHorizontalOrVertical(Point startCoord, Point endCoord)
         {
             return startCoord.X == endCoord.X || startCoord.Y == endCoord.Y;
+        }
+        
+        public static bool ValidateAddBattleshipPosition(Board board, Point startCoord, Point endCoord)
+        {
+            if (!IsValidCoordinate(board, startCoord) ||
+                !IsValidCoordinate(board, endCoord))
+                return false;
+            
+            return IsShipHorizontalOrVertical(startCoord, endCoord);
         }
     }
 }
