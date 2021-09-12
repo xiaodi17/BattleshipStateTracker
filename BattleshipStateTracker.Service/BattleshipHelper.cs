@@ -30,34 +30,23 @@ namespace BattleshipStateTracker.Service
         
         public static List<Cell> GetCellsByStartAndEndCoordinates(Board board, Point startCoord, Point endCoord)
         {
-            var cells = new List<Cell>();
-            if (startCoord.X == endCoord.X && startCoord.Y < endCoord.Y)
+            if (IsCountingCellsFromBottomLeft(startCoord, endCoord))
             {
-                cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
+                return board.Cells.Where(c => c.Coordinate.X >= startCoord.X
                                                && c.Coordinate.Y >= startCoord.Y
                                                && c.Coordinate.X <= endCoord.X
                                                && c.Coordinate.Y <= endCoord.Y).ToList();
-            } else if (startCoord.Y == endCoord.Y && startCoord.X < endCoord.X)
-            {
-                cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
-                                               && c.Coordinate.Y >= startCoord.Y
-                                               && c.Coordinate.X <= endCoord.X
-                                               && c.Coordinate.Y <= endCoord.Y).ToList();
-            } else if (startCoord.X == endCoord.X && startCoord.Y > endCoord.Y)
-            {
-                cells = board.Cells.Where(c => c.Coordinate.X >= endCoord.X
-                                               && c.Coordinate.Y >= endCoord.Y
-                                               && c.Coordinate.X <= startCoord.X
-                                               && c.Coordinate.Y <= startCoord.Y).ToList();
-            } else if (startCoord.Y == endCoord.Y && startCoord.X > endCoord.X)
-            {
-                cells = board.Cells.Where(c => c.Coordinate.X >= endCoord.X
-                                               && c.Coordinate.Y >= endCoord.Y
-                                               && c.Coordinate.X <= startCoord.X
-                                               && c.Coordinate.Y <= startCoord.Y).ToList();
-            }
+            } 
             
-            return cells;
+            return board.Cells.Where(c => c.Coordinate.X >= endCoord.X
+                                          && c.Coordinate.Y >= endCoord.Y
+                                          && c.Coordinate.X <= startCoord.X
+                                          && c.Coordinate.Y <= startCoord.Y).ToList();
+        }
+
+        private static bool IsCountingCellsFromBottomLeft(Point startCoord, Point endCoord)
+        {
+            return startCoord.X == endCoord.X && startCoord.Y < endCoord.Y || startCoord.Y == endCoord.Y && startCoord.X < endCoord.X;
         }
         
         public static bool IsCellOccupied(Cell cell)
