@@ -38,7 +38,7 @@ namespace BattleshipStateTracker.Test.UnitTest
             await _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
-            var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            await _battleshipService.AddBattleShip("A", startCoord, endCoord);
             var status = await _battleshipService.Attack("A", new Point(11,3));
 
             Assert.Null(status);
