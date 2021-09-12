@@ -34,10 +34,11 @@ namespace BattleshipStateTracker.Service
 
             foreach (var cell in cells)
             {
-                if (IsCellOccupied(boardId, cell))
+                if (IsCellOccupied(cell))
                 {
                     return null;
                 }
+                
                 cell.Status = CellStatus.Battleship;
             }
 
@@ -89,7 +90,7 @@ namespace BattleshipStateTracker.Service
             _boards = new List<Board>();
         }
 
-        private bool IsCellOccupied(string boardId, Cell cell)
+        private bool IsCellOccupied(Cell cell)
         {
             if (cell.Status == CellStatus.Battleship)
             {
