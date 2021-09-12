@@ -38,7 +38,7 @@ namespace BattleshipStateTracker.API.Controllers
                 if (board == null)
                     return BadRequest("Board can't be created.");
                 
-                return Ok();
+                return Ok(board);
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace BattleshipStateTracker.API.Controllers
 
                 if (battleShip == null)
                 {
-                    return BadRequest("Cant add battleship.");
+                    return BadRequest("Can't add battleship to the board.");
                 }
                 
                 return Ok(battleShip);

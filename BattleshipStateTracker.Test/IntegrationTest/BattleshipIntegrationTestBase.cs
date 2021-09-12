@@ -5,13 +5,13 @@ using Moq;
 
 namespace BattleshipStateTracker.Test.IntegrationTest
 {
-    public class BattleshipControllerTestBase
+    public class BattleshipIntegrationTestBase
     {
         protected BattleshipController _controller;
         private IBattleshipService _service;
         private ILogger<BattleshipController> _logger;
 
-        protected BattleshipControllerTestBase()
+        protected BattleshipIntegrationTestBase()
         {
             _service = new BattleshipService();
             _logger = Mock.Of<ILogger<BattleshipController>>();
