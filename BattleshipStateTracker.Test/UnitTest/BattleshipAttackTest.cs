@@ -4,7 +4,7 @@ using BattleshipStateTracker.Service;
 using BattleshipStateTracker.Service.Models.Enums;
 using Xunit;
 
-namespace BattleshipStateTracker.Test
+namespace BattleshipStateTracker.Test.UnitTest
 {
     public class BattleshipAttackTest
     {

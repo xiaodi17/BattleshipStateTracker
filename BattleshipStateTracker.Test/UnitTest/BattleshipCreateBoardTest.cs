@@ -1,10 +1,8 @@
-using System;
 using System.Linq;
 using BattleshipStateTracker.Service;
-using BattleshipStateTracker.Service.Models;
 using Xunit;
 
-namespace BattleshipStateTracker.Test
+namespace BattleshipStateTracker.Test.UnitTest
 {
     public class BattleshipCreateBoardTest
     {

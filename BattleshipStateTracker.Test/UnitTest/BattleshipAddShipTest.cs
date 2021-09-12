@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BattleshipStateTracker.Service;
 using Xunit;
 
-namespace BattleshipStateTracker.Test
+namespace BattleshipStateTracker.Test.UnitTest
 {
     public class BattleshipAddShipTest
     {

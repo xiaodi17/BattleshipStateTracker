@@ -10,4 +10,7 @@
     &lt;TestId&gt;xUnit::B73499C3-EB1A-4667-8E4A-E2D9BE93B640::.NETCoreApp,Version=v3.1::BattleshipStateTracker.Test.BattleshipAddShipTest.AddBattleship_On_Occupied_Cell&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::B73499C3-EB1A-4667-8E4A-E2D9BE93B640::.NETCoreApp,Version=v3.1::BattleshipStateTracker.Test.BattleshipAddShipTest.AddBattleship_Not_Vertical_Horizontal&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8aa2bae_002D5e86_002D4634_002D9b70_002D899d59c7d9c6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;BattleshipStateTracker.Test&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\github\BattleshipStateTracker\BattleshipStateTracker.Test" Presentation="&amp;lt;BattleshipStateTracker.Test&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
