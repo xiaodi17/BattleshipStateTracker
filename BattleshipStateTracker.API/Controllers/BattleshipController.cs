@@ -30,11 +30,11 @@ namespace BattleshipStateTracker.API.Controllers
         /// <param name="size"></param>
         /// <returns></returns>
         [HttpPost("create")]
-        public IActionResult Create(string boardId, int size = 10)
+        public async Task<IActionResult> Create(string boardId, int size = 10)
         {
             try
             {
-                _battleshipService.CreateBoard(boardId, size) ;
+                var board = await _battleshipService.CreateBoard(boardId, size) ;
                 return Ok();
             }
             catch (Exception ex)

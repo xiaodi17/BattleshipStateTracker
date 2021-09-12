@@ -16,10 +16,11 @@ namespace BattleshipStateTracker.Service
 
         public List<Board> _boards = new List<Board>();
 
-        public void CreateBoard(string boardId, int size = 10)
+        public async Task<Board> CreateBoard(string boardId, int size = 10)
         {
             var board = new Board(boardId,size);
             _boards.Add(board);
+            return await Task.FromResult(board);
         }
 
         public async Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord)
