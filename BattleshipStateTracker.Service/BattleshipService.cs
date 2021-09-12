@@ -22,9 +22,7 @@ namespace BattleshipStateTracker.Service
         public async Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord)
         {
             if (!ValidateAddBattleshipPosition(boardId, startCoord, endCoord))
-            {
                 return null;
-            }
             
             var board = GetBoard(boardId);
 
@@ -33,9 +31,7 @@ namespace BattleshipStateTracker.Service
             foreach (var cell in cells)
             {
                 if (IsCellOccupied(cell))
-                {
                     return null;
-                }
                 
                 cell.Status = CellStatus.Battleship;
             }
@@ -79,17 +75,11 @@ namespace BattleshipStateTracker.Service
         private bool ValidateAddBattleshipPosition(string boardId, Point startCoord, Point endCoord)
         {
             var board = GetBoard(boardId);
-            if (!BattleshipHelper.IsValidCoordinate(board, startCoord) || !BattleshipHelper.IsValidCoordinate(board, endCoord))
-            {
+            if (!BattleshipHelper.IsValidCoordinate(board, startCoord) ||
+                !BattleshipHelper.IsValidCoordinate(board, endCoord))
                 return false;
-            }
-
-            if (!BattleshipHelper.IsShipHorizontalOrVertical(startCoord, endCoord))
-            {
-                return false;
-            }
-
-            return true;
+            
+            return BattleshipHelper.IsShipHorizontalOrVertical(startCoord, endCoord);
         }
 
         public async Task<CellStatus?> Attack(string boardId, Point attackCoord)
@@ -97,9 +87,7 @@ namespace BattleshipStateTracker.Service
             var board = GetBoard(boardId);
 
             if (!BattleshipHelper.IsValidCoordinate(board, attackCoord))
-            {
                 return null;
-            }
             
             var cell = board.Cells.FirstOrDefault(c => c.Coordinate.X == attackCoord.X
                                               && c.Coordinate.Y == attackCoord.Y);
@@ -120,14 +108,9 @@ namespace BattleshipStateTracker.Service
             _boards = new List<Board>();
         }
 
-        private bool IsCellOccupied(Cell cell)
+        private static bool IsCellOccupied(Cell cell)
         {
-            if (cell.Status == CellStatus.Battleship)
-            {
-                return true;
-            }
-
-            return false;
+            return cell.Status == CellStatus.Battleship;
         }
 
         private Board GetBoard(string boardId)
