@@ -6,8 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using BattleshipStateTracker.Service;
-using BattleshipStateTracker.Service.Exceptions;
-using BattleshipStateTracker.Service.Models;
 
 namespace BattleshipStateTracker.API.Controllers
 {
@@ -72,11 +70,6 @@ namespace BattleshipStateTracker.API.Controllers
                 
                 return Ok(battleShip);
             }
-            catch (InvalidBattleshipCreateException ex)
-            {
-                _logger.LogError(ex.Message);
-                return BadRequest(ex.Message);
-            }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
@@ -103,11 +96,6 @@ namespace BattleshipStateTracker.API.Controllers
                     return BadRequest("You can't attack at this position.");
                 }
                 return Ok(response.ToString());
-            }
-            catch (InvalidAttackException ex)
-            {
-                _logger.LogError(ex.Message);
-                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

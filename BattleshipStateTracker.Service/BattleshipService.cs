@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
-using BattleshipStateTracker.Service.Exceptions;
 using BattleshipStateTracker.Service.Models;
 using BattleshipStateTracker.Service.Models.Enums;
 
@@ -71,7 +70,6 @@ namespace BattleshipStateTracker.Service
 
             if (!BattleshipHelper.IsValidCoordinate(board, attackCoord))
             {
-                // throw new InvalidAttackException("Attack out of the board.");
                 return null;
             }
             
