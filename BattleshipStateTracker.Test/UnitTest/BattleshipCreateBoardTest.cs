@@ -4,15 +4,8 @@ using Xunit;
 
 namespace BattleshipStateTracker.Test.UnitTest
 {
-    public class BattleshipCreateBoardTest
+    public class BattleshipCreateBoardTest : BattleshipUnitTestBase
     {
-        private readonly BattleshipService _battleshipService;
-
-        public BattleshipCreateBoardTest()
-        {
-            _battleshipService = new BattleshipService();
-        }
-
         [Fact]
         public void CreateBoard()
         {

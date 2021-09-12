@@ -5,15 +5,8 @@ using Xunit;
 
 namespace BattleshipStateTracker.Test.UnitTest
 {
-    public class BattleshipResetTest
+    public class BattleshipResetTest : BattleshipUnitTestBase
     {
-        private readonly BattleshipService _battleshipService;
-
-        public BattleshipResetTest()
-        {
-            _battleshipService = new BattleshipService();
-        }
-        
         [Fact]
         public async Task Battleship_Reset()
         {
