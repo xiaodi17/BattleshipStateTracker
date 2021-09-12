@@ -33,12 +33,9 @@ namespace BattleshipStateTracker.Test
             var startCoord = new Point(8, 2);
             var endCoord = new Point(2, 1);
 
-            var ex = await Assert.ThrowsAsync<InvalidBattleshipCreateException>(() => _battleshipService.AddBattleShip(
-                "A",
-                startCoord,
-                endCoord));
- 
-            Assert.Equal("Ship has to be vertical or horizontal.", ex.Message);
+            var battleShip = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            
+            Assert.Null(battleShip);
             
         }
         
@@ -48,12 +45,9 @@ namespace BattleshipStateTracker.Test
             _battleshipService.CreateBoard("A");
             var startCoord = new Point(2, 1);
             var endCoord = new Point(11, 1);
-            var ex = await Assert.ThrowsAsync<InvalidBattleshipCreateException>(() => _battleshipService.AddBattleShip(
-                "A",
-                startCoord,
-                endCoord));
- 
-            Assert.Equal("Invalid position to create battleship: Out of board.", ex.Message);
+            var battleShip = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            
+            Assert.Null(battleShip);
         }
         
         [Fact]
@@ -66,12 +60,9 @@ namespace BattleshipStateTracker.Test
             var secondShipStartCoord = new Point(5, 1);
             var secondShipEndCoord = new Point(8, 1);
             await _battleshipService.AddBattleShip("A", firstShipStartCoord, firstShipEndCoord);
-            var ex = await Assert.ThrowsAsync<InvalidBattleshipCreateException>(() => _battleshipService.AddBattleShip(
-                "A",
-                secondShipStartCoord,
-                secondShipEndCoord));
- 
-            Assert.Equal("Invalid position to create battleship: This cell is occupied.", ex.Message);
+            
+            var battleShip = await _battleshipService.AddBattleShip("A", secondShipStartCoord, secondShipEndCoord);
+            Assert.Null(battleShip);
         }
     }
 }

@@ -25,7 +25,10 @@ namespace BattleshipStateTracker.Service
 
         public async Task<Battleship> AddBattleShip(string boardId, Point startCoord, Point endCoord)
         {
-            ValidateAddBattleshipPosition(boardId, startCoord, endCoord);
+            if (!ValidateAddBattleshipPosition(boardId, startCoord, endCoord))
+            {
+                return null;
+            }
             
             var board = GetBoard(boardId);
             var cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
@@ -35,7 +38,10 @@ namespace BattleshipStateTracker.Service
 
             foreach (var cell in cells)
             {
-                ValidateBattleshipOccupied(boardId, cell);
+                if (IsCellOccupied(boardId, cell))
+                {
+                    return null;
+                }
                 cell.Status = CellStatus.Battleship;
             }
 
@@ -43,27 +49,30 @@ namespace BattleshipStateTracker.Service
             return await Task.FromResult(ship);
         }
 
-        private void ValidateAddBattleshipPosition(string boardId, Point startCoord, Point endCoord)
+        private bool ValidateAddBattleshipPosition(string boardId, Point startCoord, Point endCoord)
         {
             var board = GetBoard(boardId);
             if (!BattleshipHelper.IsValidCoordinate(board, startCoord) || !BattleshipHelper.IsValidCoordinate(board, endCoord))
             {
-                throw new InvalidBattleshipCreateException("Invalid position to create battleship: Out of board.");
+                return false;
             }
 
             if (!BattleshipHelper.IsShipHorizontalOrVertical(startCoord, endCoord))
             {
-                throw new InvalidBattleshipCreateException("Ship has to be vertical or horizontal.");
+                return false;
             }
+
+            return true;
         }
 
-        public async Task<CellStatus> Attack(string boardId, Point attackCoord)
+        public async Task<CellStatus?> Attack(string boardId, Point attackCoord)
         {
             var board = GetBoard(boardId);
 
             if (!BattleshipHelper.IsValidCoordinate(board, attackCoord))
             {
-                throw new InvalidAttackException("Attack out of the board.");
+                // throw new InvalidAttackException("Attack out of the board.");
+                return null;
             }
             
             var cell = board.Cells.FirstOrDefault(c => c.Coordinate.X == attackCoord.X
@@ -80,12 +89,14 @@ namespace BattleshipStateTracker.Service
             return await Task.FromResult(cell.Status);
         }
 
-        private void ValidateBattleshipOccupied(string boardId, Cell cell)
+        private bool IsCellOccupied(string boardId, Cell cell)
         {
             if (cell.Status == CellStatus.Battleship)
             {
-                throw new InvalidBattleshipCreateException("Invalid position to create battleship: This cell is occupied.");
+                return true;
             }
+
+            return false;
         }
 
         private Board GetBoard(string boardId)

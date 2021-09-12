@@ -64,6 +64,12 @@ namespace BattleshipStateTracker.API.Controllers
                     boardId,
                     new Point(startRow, startCol),
                     new Point(endRow, endCol));
+
+                if (battleShip == null)
+                {
+                    return BadRequest("Cant add battleship.");
+                }
+                
                 return Ok(battleShip);
             }
             catch (InvalidBattleshipCreateException ex)
@@ -91,6 +97,11 @@ namespace BattleshipStateTracker.API.Controllers
             try
             {
                 var response = await _battleshipService.Attack(boardId, new Point(row, col));
+
+                if (response == null)
+                {
+                    return BadRequest("You can't attack at this position.");
+                }
                 return Ok(response.ToString());
             }
             catch (InvalidAttackException ex)
