@@ -14,7 +14,10 @@ namespace BattleshipStateTracker.Service
 
         public async Task<Board> CreateBoard(string boardId, int size = 10)
         {
-            var board = new Board(boardId,size);
+            if (string.IsNullOrEmpty(boardId))
+                return null;
+            
+            var board = new Board(boardId, size);
             _boards.Add(board);
             return await Task.FromResult(board);
         }

@@ -107,6 +107,10 @@ namespace BattleshipStateTracker.API.Controllers
             }
         }
         
+        /// <summary>
+        /// Reset battleship board
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("reset")]
         public async Task<IActionResult> Reset()
         {
