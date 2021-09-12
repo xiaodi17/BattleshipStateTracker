@@ -17,13 +17,5 @@ namespace BattleshipStateTracker.Service.Models
         public Point StartCoordinate { get; set; }
         public Point EndCoordinate { get; set; }
         public List<Cell> Cells { get; set; }
-        
-        public bool IsSunk
-        {
-            get
-            {
-                return Cells.All(c => c.Status == CellStatus.Hit);
-            }
-        }
     }
 }
