@@ -6,15 +6,8 @@ using Xunit;
 
 namespace BattleshipStateTracker.Test.UnitTest
 {
-    public class BattleshipAttackTest
+    public class BattleshipAttackTest : BattleshipUnitTestBase
     {
-        private readonly BattleshipService _battleshipService;
-
-        public BattleshipAttackTest()
-        {
-            _battleshipService = new BattleshipService();
-        }
-        
         [Fact]
         public async Task AttackBattleship_Hit()
         {

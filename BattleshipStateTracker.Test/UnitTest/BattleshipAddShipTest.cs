@@ -5,15 +5,8 @@ using Xunit;
 
 namespace BattleshipStateTracker.Test.UnitTest
 {
-    public class BattleshipAddShipTest
+    public class BattleshipAddShipTest : BattleshipUnitTestBase
     {
-        private readonly BattleshipService _battleshipService;
-
-        public BattleshipAddShipTest()
-        {
-            _battleshipService = new BattleshipService();
-        }
-        
         [Fact]
         public async Task AddBattleship()
         {
@@ -22,6 +15,7 @@ namespace BattleshipStateTracker.Test.UnitTest
             var endCoord = new Point(2, 1);
             var ship = await _battleshipService.AddBattleShip("A",startCoord, endCoord);
 
+            Assert.NotNull(ship);
             Assert.Equal(2, ship.Cells.Count);
         }
         
@@ -62,6 +56,32 @@ namespace BattleshipStateTracker.Test.UnitTest
             
             var battleShip = await _battleshipService.AddBattleShip("A", secondShipStartCoord, secondShipEndCoord);
             Assert.Null(battleShip);
+        }
+        
+        [Fact]
+        public async Task AddBattleship_Edge_Case_Vertical()
+        {
+            await _battleshipService.CreateBoard("A");
+            var firstShipStartCoord = new Point(9, 1);
+            var firstShipEndCoord = new Point(2, 1);
+            
+            var battleShip = await _battleshipService.AddBattleShip("A", firstShipStartCoord, firstShipEndCoord);
+            
+            Assert.NotNull(battleShip);
+            Assert.Equal(8, battleShip.Cells.Count);
+        }
+        
+        [Fact]
+        public async Task AddBattleship_Edge_Case_Horizontal()
+        {
+            await _battleshipService.CreateBoard("A");
+            var firstShipStartCoord = new Point(1, 9);
+            var firstShipEndCoord = new Point(1, 3);
+            
+            var battleShip = await _battleshipService.AddBattleShip("A", firstShipStartCoord, firstShipEndCoord);
+            
+            Assert.NotNull(battleShip);
+            Assert.Equal(7, battleShip.Cells.Count);
         }
     }
 }

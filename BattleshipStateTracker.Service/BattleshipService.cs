@@ -27,10 +27,8 @@ namespace BattleshipStateTracker.Service
             }
             
             var board = GetBoard(boardId);
-            var cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
-                                               && c.Coordinate.Y >= startCoord.Y
-                                               && c.Coordinate.X <= endCoord.X
-                                               && c.Coordinate.Y <= endCoord.Y).ToList();
+
+            var cells = GetCellsByStartAndEndCoordinates(board, startCoord, endCoord);
 
             foreach (var cell in cells)
             {
@@ -44,6 +42,38 @@ namespace BattleshipStateTracker.Service
 
             var ship = new Battleship(startCoord, endCoord, cells);
             return await Task.FromResult(ship);
+        }
+
+        private List<Cell> GetCellsByStartAndEndCoordinates(Board board, Point startCoord, Point endCoord)
+        {
+            var cells = new List<Cell>();
+            if (startCoord.X == endCoord.X && startCoord.Y < endCoord.Y)
+            {
+                cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
+                                                   && c.Coordinate.Y >= startCoord.Y
+                                                   && c.Coordinate.X <= endCoord.X
+                                                   && c.Coordinate.Y <= endCoord.Y).ToList();
+            } else if (startCoord.Y == endCoord.Y && startCoord.X < endCoord.X)
+            {
+                cells = board.Cells.Where(c => c.Coordinate.X >= startCoord.X
+                                                   && c.Coordinate.Y >= startCoord.Y
+                                                   && c.Coordinate.X <= endCoord.X
+                                                   && c.Coordinate.Y <= endCoord.Y).ToList();
+            } else if (startCoord.X == endCoord.X && startCoord.Y > endCoord.Y)
+            {
+                cells = board.Cells.Where(c => c.Coordinate.X >= endCoord.X
+                                               && c.Coordinate.Y >= endCoord.Y
+                                               && c.Coordinate.X <= startCoord.X
+                                               && c.Coordinate.Y <= startCoord.Y).ToList();
+            } else if (startCoord.Y == endCoord.Y && startCoord.X > endCoord.X)
+            {
+                cells = board.Cells.Where(c => c.Coordinate.X >= endCoord.X
+                                               && c.Coordinate.Y >= endCoord.Y
+                                               && c.Coordinate.X <= startCoord.X
+                                               && c.Coordinate.Y <= startCoord.Y).ToList();
+            }
+            
+            return cells;
         }
 
         private bool ValidateAddBattleshipPosition(string boardId, Point startCoord, Point endCoord)
