@@ -34,7 +34,10 @@ namespace BattleshipStateTracker.API.Controllers
         {
             try
             {
-                var board = await _battleshipService.CreateBoard(boardId, size) ;
+                var board = await _battleshipService.CreateBoard(boardId, size);
+                if (board == null)
+                    return BadRequest("Board can't be created.");
+                
                 return Ok();
             }
             catch (Exception ex)
