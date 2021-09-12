@@ -47,7 +47,7 @@ namespace BattleshipStateTracker.Service
             return await Task.FromResult(ship);
         }
 
-        public async Task<CellStatus?> Attack(string boardId, Point attackCoord)
+        public async Task<Cell> Attack(string boardId, Point attackCoord)
         {
             var board = GetBoard(boardId);
 
@@ -65,7 +65,7 @@ namespace BattleshipStateTracker.Service
                 cell.Status = CellStatus.Miss;
             }
 
-            return await Task.FromResult(cell.Status);
+            return await Task.FromResult(cell);
         }
 
         public async Task<List<Board>> Reset()

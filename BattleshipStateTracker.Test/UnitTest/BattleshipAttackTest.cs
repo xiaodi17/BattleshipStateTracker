@@ -14,10 +14,10 @@ namespace BattleshipStateTracker.Test.UnitTest
             await _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
-            var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
-            var status = await _battleshipService.Attack("A", startCoord);
+            await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            var cell = await _battleshipService.Attack("A", startCoord);
 
-            Assert.Equal(CellStatus.Hit, status);
+            Assert.Equal(CellStatus.Hit, cell.Status);
         }
         
         [Fact]
@@ -26,10 +26,10 @@ namespace BattleshipStateTracker.Test.UnitTest
             await _battleshipService.CreateBoard("A");
             var startCoord = new Point(1, 1);
             var endCoord = new Point(2, 1);
-            var ship = await _battleshipService.AddBattleShip("A", startCoord, endCoord);
-            var status = await _battleshipService.Attack("A", new Point(3,3));
+            await _battleshipService.AddBattleShip("A", startCoord, endCoord);
+            var cell = await _battleshipService.Attack("A", new Point(3,3));
 
-            Assert.Equal(CellStatus.Miss, status);
+            Assert.Equal(CellStatus.Miss, cell.Status);
         }
         
         [Fact]

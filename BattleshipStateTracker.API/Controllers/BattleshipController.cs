@@ -92,13 +92,13 @@ namespace BattleshipStateTracker.API.Controllers
         {
             try
             {
-                var response = await _battleshipService.Attack(boardId, new Point(row, col));
+                var cell = await _battleshipService.Attack(boardId, new Point(row, col));
 
-                if (response == null)
+                if (cell == null)
                 {
                     return BadRequest("You can't attack at this position.");
                 }
-                return Ok(response.ToString());
+                return Ok(cell);
             }
             catch (Exception ex)
             {
